@@ -496,4 +496,3 @@ Allow subclasses to customize shipment preparation and confirmation while preser
 ### One-Line Summary
 
 The Template Method Pattern defines the steps and order of an algorithm in a base class while allowing subclasses to customize selected steps without changing the overall workflow.
-# Template Pattern
