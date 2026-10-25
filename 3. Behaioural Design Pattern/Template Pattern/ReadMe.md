@@ -80,50 +80,33 @@ Inherits from the abstract class and implements or overrides the customizable st
 
 ---
 
-## UML Class Diagram — Command Pattern
+## UML Class Diagram — Template Method Pattern
 
 ```mermaid
 classDiagram
-    class Command {
-        <<interface>>
-        +execute()
+    class Beverage {
+        <<abstract>>
+        +prepare_recipe()
+        #boil_water()
+        #brew()*
+        #pour_in_cup()
+        #add_condiments()*
     }
 
-    class LightOnCommand {
-        -Light light
-        +LightOnCommand(light)
-        +execute()
+    class Tea {
+        +brew()
+        +add_condiments()
     }
 
-    class LightOffCommand {
-        -Light light
-        +LightOffCommand(light)
-        +execute()
+    class Coffee {
+        +brew()
+        +add_condiments()
     }
 
-    class Light {
-        +turn_on()
-        +turn_off()
-    }
+    Beverage <|-- Tea : inherits
+    Beverage <|-- Coffee : inherits
 
-    class RemoteControl {
-        -Command command
-        +set_command(command)
-        +press_button()
-    }
-
-    class Client
-
-    Command <|.. LightOnCommand : implements
-    Command <|.. LightOffCommand : implements
-
-    LightOnCommand --> Light : calls
-    LightOffCommand --> Light : calls
-
-    RemoteControl --> Command : executes
-    Client ..> RemoteControl : configures
-    Client ..> LightOnCommand : creates
-    Client ..> LightOffCommand : creates
+    note for Beverage "Template method defines the algorithm sequence"
 ```
 
 The `prepare_recipe()` method is the template method. It calls the steps in a fixed order, while `Tea` and `Coffee` customize the brewing and condiment steps.

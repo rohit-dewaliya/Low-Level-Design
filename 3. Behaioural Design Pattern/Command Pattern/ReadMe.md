@@ -77,7 +77,7 @@ Creates the receiver, concrete command, and invoker, then connects them together
 
 ---
 
-## 4. UML Class Diagram
+## UML Class Diagram — Command Pattern
 
 ```mermaid
 classDiagram
@@ -88,6 +88,13 @@ classDiagram
 
     class LightOnCommand {
         -Light light
+        +LightOnCommand(light)
+        +execute()
+    }
+
+    class LightOffCommand {
+        -Light light
+        +LightOffCommand(light)
         +execute()
     }
 
@@ -104,11 +111,16 @@ classDiagram
 
     class Client
 
-    Command <|.. LightOnCommand
-    LightOnCommand --> Light : invokes
+    Command <|.. LightOnCommand : implements
+    Command <|.. LightOffCommand : implements
+
+    LightOnCommand --> Light : calls
+    LightOffCommand --> Light : calls
+
     RemoteControl --> Command : executes
     Client ..> RemoteControl : configures
     Client ..> LightOnCommand : creates
+    Client ..> LightOffCommand : creates
 ```
 
 ### Relationship Summary
